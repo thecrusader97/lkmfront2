@@ -7,7 +7,7 @@ function PromoPage() {
     return (
         <ScrollView bg={setUp.softWhite} showsVerticalScrollIndicator={false}>
             <Box safeArea padding={setUp.paddingScreen}>
-                <Heading color={setUp.HeavyGray} mb={4}>Promo</Heading>
+                <Heading color={setUp.HeavyGray} mb={4} fontSize={20}>Promo</Heading>
                 {/* <Center py={10} mt='100px'>
                     <Image source={require('../../assets/icons/empty-promo.png')} alt='history' width='180px' h='150px' resizeMode='contain' />
                     <Heading fontSize={16} color={setUp.LigtGray} letterSpacing={1}>Wah Kosong !</Heading>

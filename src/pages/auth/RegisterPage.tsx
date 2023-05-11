@@ -1,6 +1,6 @@
 import { Box, Button, Center, Checkbox, HStack, Image, Input, Pressable, KeyboardAvoidingView, Text, VStack } from 'native-base'
 import React, { useState } from 'react'
-import setUp from '../setup'
+import setUp from '../../setup'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
@@ -12,10 +12,10 @@ function RegisterPage() {
     return (
         <KeyboardAvoidingView behavior='height' enabled={true} style={{ flex: 1 }}>
             <Box safeArea bg={setUp.bgScreen}>
-                <Image source={require('../../assets/ellipse.png')} alt='background' h='full' w='full' resizeMode='cover' />
+                <Image source={require('../../../assets/ellipse.png')} alt='background' h='full' w='full' resizeMode='cover' />
                 <Box position='absolute' left={0} top={0} w='full' h='full' padding={setUp.paddingScreen}>
                     <Center height='40%'>
-                        <Image source={require('../../assets/logo.png')} alt='logo' size='1/2' resizeMode='contain' />
+                        <Image source={require('../../../assets/logo.png')} alt='logo' size='1/2' resizeMode='contain' />
                     </Center>
                     <VStack space={3}>
                         <Input type='text' _focus={{ bg: setUp.softWhite, borderColor: setUp.bgPrimary }} variant='outline' borderColor={setUp.LigtGray} borderRadius={setUp.radius} bg={setUp.softWhite} placeholder='Nama' px={4} />

@@ -1,6 +1,6 @@
 import { Box, Button, Center, Checkbox, HStack, Image, Input, KeyboardAvoidingView, Pressable, ScrollView, Text, VStack } from 'native-base'
 import React, { useState } from 'react'
-import setUp from '../setup'
+import setUp from '../../setup'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
@@ -11,10 +11,10 @@ function LoginPage() {
     return (
         <KeyboardAvoidingView behavior='height' enabled={true} style={{ flex: 1 }}>
             <Box safeArea bg={setUp.bgScreen}>
-                <Image position='absolute' left={0} top={0} source={require('../../assets/ellipse.png')} alt='background' h='full' w='full' />
+                <Image position='absolute' left={0} top={0} source={require('../../../assets/ellipse.png')} alt='background' h='full' w='full' />
                 <Box h='full' padding={setUp.paddingScreen}>
                     <Center height='45%'>
-                        <Image source={require('../../assets/logo.png')} alt='logo' size='1/2' resizeMode='contain' />
+                        <Image source={require('../../../assets/logo.png')} alt='logo' size='1/2' resizeMode='contain' />
                     </Center>
                     <VStack space={4}>
                         <Input type='text' _focus={{ bg: setUp.softWhite, borderColor: setUp.bgPrimary }} variant='outline' borderColor={setUp.LigtGray} borderRadius={setUp.radius} bg={setUp.softWhite} placeholder='08xxxxxxx' px={4} />
@@ -28,7 +28,7 @@ function LoginPage() {
                                 <Checkbox _checked={{ bg: setUp.bgPrimary, borderColor: setUp.bgPrimary }} borderColor={setUp.bgPrimary} value='' aria-label='remember me' _focus={{ bg: setUp.bgPrimary }} borderRadius={6} />
                                 <Text fontSize={12} color={setUp.LigtGray}>Remember me</Text>
                             </HStack>
-                            <Pressable>
+                            <Pressable onPress={() => navigation.navigate('ForgotPassword')}>
                                 <Text fontSize={12} color={setUp.LigtGray} underline>Forgot Password ?</Text>
                             </Pressable>
                         </HStack>

@@ -35,7 +35,7 @@ function NotifPage() {
         <ScrollView bg={setUp.softWhite}>
             <Stack safeArea p={setUp.paddingScreen}>
                 <HStack justifyContent='space-between' alignItems='center' mb={2}>
-                    <Heading color={setUp.HeavyGray} >Notifikasi</Heading>
+                    <Heading color={setUp.HeavyGray} fontSize={20}>Notifikasi</Heading>
                     <Button _pressed={{ bg: setUp.bgScreen }} h={12} w={12} variant='ghost' borderRadius='full'>
                         <Icon name='options-outline' size={24} color={setUp.HeavyGray} />
                     </Button>

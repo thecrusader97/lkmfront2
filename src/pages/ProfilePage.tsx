@@ -54,12 +54,13 @@ function ProfilePage() {
 
     return (
         <ScrollView bg={setUp.softWhite} showsVerticalScrollIndicator={false}>
+            <Image position='absolute' opacity={.35} left={0} top={0} source={require('../../assets/ellipse.png')} alt='background' h='full' w='full' />
             <Stack safeArea p={setUp.paddingScreen}>
                 <HStack alignItems='center' space={2} mb={4}>
                     <Button variant='ghost' rounded='full' h={12} w={12} bg={setUp.bgScreen} _pressed={{ bg: setUp.softWhite }} onPress={() => navigation.navigate('BottomTabs')}>
                         <Icon name='chevron-back-outline' size={24} />
                     </Button>
-                    <Heading color={setUp.HeavyGray} >Profile</Heading>
+                    <Heading color={setUp.HeavyGray} fontSize={20}>Profile</Heading>
                 </HStack>
                 <Center py={4} mb={4}>
                     <Box borderRadius='full' shadow={8} mb={3}>

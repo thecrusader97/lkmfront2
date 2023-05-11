@@ -28,7 +28,7 @@ function SearchLocation(props: any) {
                 props.handleCallback(details?.geometry.location)
             }} placeholder='Search Location' query={{
                 key: 'AIzaSyDJrEmzxXZYEx5VMFTO9WN692JwgX2zj6U',
-                language: 'en',
+                language: 'id',
             }} />
     )
 }

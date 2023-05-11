@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import setUp from '../setup'
 import { LinearGradient } from 'expo-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native'
 
 
 function HistoryPage() {
+    const navigation: any = useNavigation()
     const listHistory = [
         {
             invoice: '#UHI8212',
@@ -42,7 +44,7 @@ function HistoryPage() {
         <ScrollView bg={setUp.softWhite} showsVerticalScrollIndicator={false}>
             <Box safeArea p={setUp.paddingScreen}>
                 <HStack justifyContent='space-between' alignItems='center' mb={2}>
-                    <Heading color={setUp.HeavyGray} >Riwayat</Heading>
+                    <Heading color={setUp.HeavyGray} fontSize={20}>Riwayat</Heading>
                     <Button _pressed={{ bg: setUp.bgScreen }} h={12} w={12} variant='ghost' borderRadius='full'>
                         <Icon name='options-outline' size={24} color={setUp.HeavyGray} />
                     </Button>
@@ -58,25 +60,27 @@ function HistoryPage() {
 
                 <VStack space={3}>
                     {listHistory.map((item, index) =>
-                        <Box key={index} borderRadius={setUp.radius} bg={setUp.bgScreen} position='relative' p={4}>
-                            <HStack space={3}>
-                                <LinearGradient colors={[setUp.bgPrimary, setUp.bgSecondary]} start={{ x: 0, y: -1 }} style={{ borderRadius: setUp.radius, elevation: 5 }} >
-                                    <Box w='50px' h='50px' overflow='hidden'>
-                                        <Image source={require('../../assets/masking.png')} alt='masking' w='full' h='full' />
-                                    </Box>
-                                </LinearGradient>
-                                <VStack flex={2}>
-                                    <HStack space={1.5} alignItems='center'>
-                                        <Text fontSize={10} color={setUp.MidGray}>{item.invoice}</Text>
-                                        <Box w='3.5px' h='3.5px' bg={setUp.LigtGray} rounded='full'></Box>
-                                        <Text fontSize={10} color={setUp.MidGray}>{item.type}</Text>
-                                    </HStack>
-                                    <Heading fontSize={20} color={setUp.HeavyRed}>Rp. {item.price}</Heading>
-                                    <Text fontSize={10} color={setUp.bgSecondary}>{item.date}</Text>
-                                </VStack>
-                                <Text fontSize={10} bold color={item.status == 'success' ? '#40c94a' : 'amber.700'}>{item.status}</Text>
-                            </HStack>
-                        </Box>
+                        <Pressable key={index} onPress={() => navigation.navigate('RateDriver')}>
+                            <Box borderRadius={setUp.radius} bg={setUp.bgScreen} position='relative' p={4}>
+                                <HStack space={3}>
+                                    <LinearGradient colors={[setUp.bgPrimary, setUp.bgSecondary]} start={{ x: 0, y: -1 }} style={{ borderRadius: setUp.radius, elevation: 5 }} >
+                                        <Box w='50px' h='50px' overflow='hidden'>
+                                            <Image source={require('../../assets/masking.png')} alt='masking' w='full' h='full' />
+                                        </Box>
+                                    </LinearGradient>
+                                    <VStack flex={2}>
+                                        <HStack space={1.5} alignItems='center'>
+                                            <Text fontSize={10} color={setUp.MidGray}>{item.invoice}</Text>
+                                            <Box w='3.5px' h='3.5px' bg={setUp.LigtGray} rounded='full'></Box>
+                                            <Text fontSize={10} color={setUp.MidGray}>{item.type}</Text>
+                                        </HStack>
+                                        <Heading fontSize={20} color={setUp.HeavyRed}>Rp. {item.price}</Heading>
+                                        <Text fontSize={10} color={setUp.bgSecondary}>{item.date}</Text>
+                                    </VStack>
+                                    <Text fontSize={10} bold color={item.status == 'success' ? '#40c94a' : 'amber.700'}>{item.status}</Text>
+                                </HStack>
+                            </Box>
+                        </Pressable>
                     )}
                 </VStack>
             </Box >
