@@ -36,7 +36,7 @@ function SetLocation(props: any) {
                     <Heading color={setUp.bgPrimary} fontSize={23}>Rp. 6500</Heading>
                 </VStack>
                 <LinearGradient colors={[setUp.bgPrimary, setUp.bgSecondary]} start={{ x: 0, y: 1 }} style={{ borderRadius: setUp.radius, elevation: 5 }}>
-                    <Button onPress={() => navigation.navigate('SearchDriver')} bg='transparent' py={3} px={5} borderRadius={setUp.radius} _pressed={{ bg: '#ffffff17' }}>
+                    <Button onPress={() => navigation.navigate('PaymentProcess', { otherPage: props.withParams })} bg='transparent' py={3} px={5} borderRadius={setUp.radius} _pressed={{ bg: '#ffffff17' }}>
                         Lanjutkan
                     </Button>
                 </LinearGradient>

@@ -8,6 +8,9 @@ import * as Location from 'expo-location'
 import SearchLocation from '../../components/SearchLocation'
 import { Dimensions } from 'react-native'
 import SetLocation from '../../components/SetLocation'
+import MapViewDirections from 'react-native-maps-directions'
+import SearchByMaps from '../../components/SearchByMaps'
+import TravelHistory from '../../components/TravelHistory'
 
 function BoncengPage() {
     const navigation: any = useNavigation()
@@ -22,17 +25,17 @@ function BoncengPage() {
     const history = ['bangladesh', 'papua newguinie', 'afrika', 'nigeria']
     const [currentLocation, setCurrentLocation] = useState<any>({})
     const [address, setAddress] = useState<any>({})
-    const [destionation, setDestionation] = useState(false)
+    const [destination, setDestination] = useState(false)
     const [initialMaps, setInitialMaps] = useState(true)
+    const [searchByMaps, setSearchByMaps] = useState(false)
     const [skeletonLoader, setSkeletonLoader] = useState(false)
 
     useEffect(() => {
         getPermissions()
-        console.log(currentLocation);
     }, [])
 
     const coordinates = [
-        initialRegion,
+        currentLocation,
         address
     ];
 
@@ -55,9 +58,10 @@ function BoncengPage() {
     function callbackDataFromChild(location: any) {
         setSkeletonLoader(true)
         setInitialMaps(false)
+        setDestination(false)
         setTimeout(() => {
             setSkeletonLoader(false)
-            setDestionation(true)
+            setDestination(true)
         }, 2500)
         setAddress({
             latitude: location.lat,
@@ -75,9 +79,18 @@ function BoncengPage() {
 
     }
 
+    function mapChoose() {
+        setSkeletonLoader(true)
+        setTimeout(() => {
+            setSearchByMaps(true)
+            setSkeletonLoader(false)
+        }, 2500)
+    }
+
     function cancelLocation() {
         setSkeletonLoader(true)
-        setDestionation(false)
+        setDestination(false)
+        setSearchByMaps(false)
         setTimeout(() => {
             setSkeletonLoader(false)
             setInitialMaps(true)
@@ -97,7 +110,9 @@ function BoncengPage() {
                             <Image source={require('../../assets/icons/pin-dest.png')} alt='pin-dest' resizeMode='contain' size={10} />
                         </Marker>
                         : null}
-                    <Polyline coordinates={coordinates} strokeWidth={2} strokeColor="#FF0000" />
+                    {/* <MapViewDirections origin={initialRegion}
+                        destination={address}
+                        apikey='AIzaSyDJrEmzxXZYEx5VMFTO9WN692JwgX2zj6U' /> */}
                 </MapView>
                 <Button position='absolute' left={5} top={5} variant='ghost' rounded='full' h={12} w={12} bg={setUp.bgScreen} _pressed={{ bg: setUp.softWhite }} onPress={() => navigation.navigate('BottomTabs')}>
                     <Icon name='chevron-back-outline' size={24} />
@@ -105,7 +120,19 @@ function BoncengPage() {
                 <Box position='absolute' bottom={0} left={0} py={8} p={setUp.paddingScreen} bg={setUp.bgScreen} w='full' minH='40%' roundedTopLeft='2xl' roundedTopRight='2xl'>
                     <Box w={12} h={1.5} bg='#E2E2E2' rounded='full' position='absolute' left='50%' top={3} />
                     <Heading fontSize={14} mb={3} color={setUp.bgPrimary}>Mau dibonceng kemana hari ini ?</Heading>
-                    <SearchLocation handleCallback={callbackDataFromChild} />
+
+                    {!searchByMaps ?
+                        <SearchLocation handleCallback={callbackDataFromChild} />
+                        : null}
+
+                    {!searchByMaps && !destination && !skeletonLoader ?
+                        <Button onPress={mapChoose} mb={4} variant='ghost' bg={setUp.bgCard} rounded='2xl' justifyContent='flex-start'>
+                            <HStack space={2} py={3}>
+                                <Image source={require('../../assets/icons/vektorline.png')} size={8} alt='vektorline' resizeMode='contain' ml={3} />
+                                <Text alignSelf='center' color={setUp.bgSecondary}>Cari lewat peta ?</Text>
+                            </HStack>
+                        </Button>
+                        : null}
 
                     {skeletonLoader ?
                         <VStack space={3} my={2}>
@@ -114,27 +141,9 @@ function BoncengPage() {
                             <Skeleton rounded='full' h={5} w='full' />
                         </VStack>
                         : null}
-                    {destionation ? <SetLocation cancelLocation={cancelLocation} /> : null}
-                    {initialMaps ?
-                        <Box>
-                            <Button mb={4} variant='ghost' bg={setUp.bgCard} rounded='2xl' justifyContent='flex-start'>
-                                <HStack space={2} py={3}>
-                                    <Image source={require('../../assets/icons/vektorline.png')} size={8} alt='vektorline' resizeMode='contain' ml={3} />
-                                    <Text alignSelf='center' color={setUp.bgSecondary}>Cari lewat peta ?</Text>
-                                </HStack>
-                            </Button>
-                            <Text fontSize={12} mb={3} color={setUp.HeavyGray}>Riwayat perjalanan</Text>
-                            <FlatList maxH={12} nestedScrollEnabled showsVerticalScrollIndicator={false} data={history}
-                                renderItem={({ item }) =>
-                                    <Pressable style={{ marginBottom: 2, paddingVertical: 3 }}>
-                                        <HStack alignItems='center' space={2}>
-                                            <Icon name='time-outline' size={12} color={setUp.MidGray} /><Text fontSize={12} color={setUp.MidGray}>{item}</Text>
-                                        </HStack>
-                                    </Pressable>
-                                }
-                            />
-                        </Box>
-                        : null}
+                    {destination ? <SetLocation cancelLocation={cancelLocation} originLocation={initialRegion} destination={address} /> : null}
+                    {searchByMaps ? <SearchByMaps handleByMaps={() => setSearchByMaps(true)} cancelLocation={cancelLocation} /> : null}
+                    {!destination && !searchByMaps && !skeletonLoader ? <TravelHistory /> : null}
 
                 </Box>
             </Box>

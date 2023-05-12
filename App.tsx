@@ -17,9 +17,9 @@ import OTP from "./src/pages/auth/OTP";
 import ResetPassword from "./src/pages/auth/ResetPassword";
 import SearchDriver from "./src/pages/SearchDriver";
 import RateDriver from "./src/pages/RateDriver";
+import PaymentProcess from "./src/pages/PaymentProcess";
 
 const Stack = createNativeStackNavigator()
-
 export default function App() {
   return (
     <NativeBaseProvider>
@@ -33,6 +33,7 @@ export default function App() {
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="BoncengPage" component={BoncengPage} />
           <Stack.Screen name="TitipPage" component={TitipPage} />
+          <Stack.Screen name="PaymentProcess" component={PaymentProcess} />
           <Stack.Screen name="JajananPage" component={JajananPage} />
           <Stack.Screen name="RateDriver" component={RateDriver} />
           <Stack.Screen name="ProfilePage" component={ProfilePage} />
