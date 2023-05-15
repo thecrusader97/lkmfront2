@@ -6,7 +6,7 @@ import * as Location from 'expo-location'
 import setUp from '../setup'
 import Icon from 'react-native-vector-icons/Ionicons'
 import SearchLocation from '../../components/SearchLocation'
-import SearchByMaps from '../../components/SearchByMaps'
+import SetByMaps from '../../components/SetByMaps'
 import TravelHistory from '../../components/TravelHistory'
 import { Dimensions } from 'react-native'
 import SetLocation from '../../components/SetLocation'
@@ -141,7 +141,7 @@ function TitipPage() {
                         </VStack>
                         : null}
                     {destination ? <SetLocation withParams={true} cancelLocation={cancelLocation} originLocation={initialRegion} destination={address} /> : null}
-                    {searchByMaps ? <SearchByMaps withParams={true} handleByMaps={() => setSearchByMaps(true)} cancelLocation={cancelLocation} /> : null}
+                    {searchByMaps ? <SetByMaps withParams={true} handleByMaps={() => setSearchByMaps(true)} cancelLocation={cancelLocation} /> : null}
                     {!destination && !searchByMaps && !skeletonLoader ? <TravelHistory /> : null}
                 </Box>
             </Box>

@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
 
-function SearchByMaps(props: any) {
+function SetByMaps(props: any) {
     const navigation: any = useNavigation()
     const [origin, setOrigin] = useState(false)
     const [destination, setDestination] = useState(false)
@@ -73,4 +73,4 @@ function SearchByMaps(props: any) {
     )
 }
 
-export default SearchByMaps
+export default SetByMaps

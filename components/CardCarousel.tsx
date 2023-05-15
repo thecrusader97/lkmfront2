@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native'
 import { Box, Center, HStack, Image, Pressable, Text } from 'native-base';
 import setUp from '../src/setup';
 
-function CardCarousel({ data }: any) {
+function CardCarousel({ data, typeLayout, invert }: any) {
   const SLIDER_WIDTH = Dimensions.get('window').width - (setUp.paddingScreen * 4 * 2);
   const isCarousel = useRef<any>(null)
   const [activeTab, setActiveTab] = useState<any>(0)
@@ -21,7 +21,7 @@ function CardCarousel({ data }: any) {
     <Box overflow='hidden'>
       <Center>
         <Carousel
-          layout='default'
+          layout={typeLayout}
           layoutCardOffset={9}
           ref={isCarousel}
           data={data}
@@ -36,7 +36,11 @@ function CardCarousel({ data }: any) {
         <HStack space={1} mt={2}>
           {data.map((item: any, index: number) =>
             <Pressable key={index}>
-              <Box h={1} w={index == activeTab ? 4 : 2} rounded='full' bg={index == activeTab ? 'white' : setUp.whiteOpacity} />
+              {invert ?
+                <Box h={1} w={index == activeTab ? 4 : 2} rounded='full' bg={index == activeTab ? setUp.bgPrimary : setUp.LigtGray} />
+                :
+                <Box h={1} w={index == activeTab ? 4 : 2} rounded='full' bg={index == activeTab ? 'white' : setUp.whiteOpacity} />
+              }
             </Pressable>
           )}
         </HStack>

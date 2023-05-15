@@ -11,7 +11,7 @@ function HomePage() {
         {
             name: 'Jajanan',
             url: 'JajananPage',
-            active: false,
+            active: true,
             img: require('../../assets/icons/FoodBaricon.png')
         },
         {

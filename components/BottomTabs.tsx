@@ -8,10 +8,6 @@ import NotifPage from '../src/pages/NotifPage';
 import PromoPage from '../src/pages/PromoPage';
 const Tab = createBottomTabNavigator();
 
-const customTabs = ({ childrem, onPress }: any) => (
-    <Text>tuuuul</Text>
-)
-
 const styles = StyleSheet.create({
     tab: {
         elevation: 2,

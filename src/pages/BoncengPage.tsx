@@ -9,7 +9,7 @@ import SearchLocation from '../../components/SearchLocation'
 import { Dimensions } from 'react-native'
 import SetLocation from '../../components/SetLocation'
 import MapViewDirections from 'react-native-maps-directions'
-import SearchByMaps from '../../components/SearchByMaps'
+import SetByMaps from '../../components/SetByMaps'
 import TravelHistory from '../../components/TravelHistory'
 
 function BoncengPage() {
@@ -142,7 +142,7 @@ function BoncengPage() {
                         </VStack>
                         : null}
                     {destination ? <SetLocation cancelLocation={cancelLocation} originLocation={initialRegion} destination={address} /> : null}
-                    {searchByMaps ? <SearchByMaps handleByMaps={() => setSearchByMaps(true)} cancelLocation={cancelLocation} /> : null}
+                    {searchByMaps ? <SetByMaps handleByMaps={() => setSearchByMaps(true)} cancelLocation={cancelLocation} /> : null}
                     {!destination && !searchByMaps && !skeletonLoader ? <TravelHistory /> : null}
 
                 </Box>
