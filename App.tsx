@@ -18,6 +18,7 @@ import ResetPassword from "./src/pages/auth/ResetPassword";
 import SearchDriver from "./src/pages/SearchDriver";
 import RateDriver from "./src/pages/RateDriver";
 import PaymentProcess from "./src/pages/PaymentProcess";
+import Chats from "./src/pages/Chats";
 
 const Stack = createNativeStackNavigator()
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
           <Stack.Screen name="ProfilePage" component={ProfilePage} />
           <Stack.Screen name="RegisterPage" component={RegisterPage} />
           <Stack.Screen name="SearchDriver" component={SearchDriver} />
+          <Stack.Screen name="ChatPage" component={Chats} />
           <Stack.Screen name="BottomTabs" component={BottomTabs} />
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,9 +1,9 @@
-import { Box, Button, Center, HStack, Heading, Image, ScrollView, Stack, Text, VStack } from 'native-base'
+import { Box, Button, Center, HStack, Heading, Image, ScrollView, Stack, Text, VStack, Pressable } from 'native-base'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Ionicons'
 import setUp from '../setup'
 
-function NotifPage() {
+function NotifPage({ navigation, route }: any) {
     const listChats = [
         {
             img: 'https://source.unsplash.com/200x200/?person',
@@ -47,28 +47,30 @@ function NotifPage() {
                 </Center> */}
                 <VStack space={3}>
                     {listChats.map((item, index) =>
-                        <Box key={index} borderRadius={setUp.radius} bg={setUp.bgScreen} p={4}>
-                            <HStack space={3} w='full'>
-                                <Box position='relative'>
-                                    <Image source={{ uri: item.img }} alt={item.name} rounded='full' size={10} />
-                                    {item.isNew ?
-                                        <Box w={3} h={3} rounded='full' bg={setUp.bgPrimary} position='absolute' right={0} borderWidth={2} borderColor='white'></Box>
-                                        : null}
-                                </Box>
-                                <Box flex={2}>
-                                    <Heading fontSize={14} color={setUp.HeavyGray} isTruncated>{item.name}</Heading>
-                                    <Text fontSize={10} color={setUp.MidGray} isTruncated>{item.message}</Text>
-                                </Box>
-                                <Box alignItems='flex-end'>
-                                    <Text fontSize={11} mb={1} color={setUp.bgPrimary}>{item.time}</Text>
-                                    {item.isNew ?
-                                        <Box w={5} h={5} rounded='full' bg={setUp.bgCard} justifyContent='center' alignItems='center'>
-                                            <Text fontSize={9} bold color={setUp.bgPrimary}>{item.unread}</Text>
-                                        </Box>
-                                        : null}
-                                </Box>
-                            </HStack>
-                        </Box>
+                        <Pressable key={index} onPress={() => navigation.navigate('ChatPage')}>
+                            <Box borderRadius={setUp.radius} bg={setUp.bgScreen} p={4}>
+                                <HStack space={3} w='full'>
+                                    <Box position='relative'>
+                                        <Image source={{ uri: item.img }} alt={item.name} rounded='full' size={10} />
+                                        {item.isNew ?
+                                            <Box w={3} h={3} rounded='full' bg={setUp.bgPrimary} position='absolute' right={0} borderWidth={2} borderColor='white'></Box>
+                                            : null}
+                                    </Box>
+                                    <Box flex={2}>
+                                        <Heading fontSize={14} color={setUp.HeavyGray} isTruncated>{item.name}</Heading>
+                                        <Text fontSize={10} color={setUp.MidGray} isTruncated>{item.message}</Text>
+                                    </Box>
+                                    <Box alignItems='flex-end'>
+                                        <Text fontSize={11} mb={1} color={setUp.bgPrimary}>{item.time}</Text>
+                                        {item.isNew ?
+                                            <Box w={5} h={5} rounded='full' bg={setUp.bgCard} justifyContent='center' alignItems='center'>
+                                                <Text fontSize={9} bold color={setUp.bgPrimary}>{item.unread}</Text>
+                                            </Box>
+                                            : null}
+                                    </Box>
+                                </HStack>
+                            </Box>
+                        </Pressable>
                     )}
                 </VStack>
             </Stack>
