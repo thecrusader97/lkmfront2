@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 function Chats({ navigation }: any) {
     const [online, setOnline] = useState(true)
+
     return (
         <Stack safeArea flex={1}>
             <Box bg='white' p={setUp.paddingScreen}>
@@ -37,7 +38,7 @@ function Chats({ navigation }: any) {
                         </Box>
                         <HStack justifyContent='flex-end' alignItems='center' space={1}>
                             <Text fontSize={10} color={setUp.MidGray}>14.50</Text>
-                            <Icon name='checkmark-done-outline' size={12} color='#0B40FF' />
+                            <Icon name='checkmark-done-outline' size={12} color='#1e81b0' />
                         </HStack>
                     </VStack>
                     <VStack alignSelf='flex-start'>
@@ -45,20 +46,38 @@ function Chats({ navigation }: any) {
                             <Text fontSize={12} textAlign='left' color='gray.700'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis iure mollitia omnis dolorem enim. Accusamus eum, harum asperiores saepe eligendi possimus ipsum quibusdam commodi et assumenda atque. Hic, quos cupiditate. !</Text>
                         </Box>
                         <HStack justifyContent='flex-start' alignItems='center' space={1}>
-                            <Icon name='checkmark-done-outline' size={12} color='#0B40FF' />
+                            <Icon name='checkmark-done-outline' size={12} color='#1e81b0' />
                             <Text fontSize={10} color={setUp.MidGray}>15.10</Text>
+                        </HStack>
+                    </VStack>
+                    <VStack alignSelf='flex-end'>
+                        <Box maxWidth='3/4' borderWidth={2} borderColor={setUp.bgPrimary} rounded='xl' overflow='hidden'>
+                            <Image source={{ uri: 'https://source.unsplash.com/1200x600/?landscape' }} alt='up-image' size='xl' />
+                        </Box>
+                        <HStack justifyContent='flex-end' alignItems='center' space={1}>
+                            <Text fontSize={10} color={setUp.MidGray}>15.23</Text>
+                            <Icon name='checkmark-done-outline' size={12} color='#1e81b0' />
+                        </HStack>
+                    </VStack>
+                    <VStack alignSelf='flex-end'>
+                        <Box maxWidth='3/4' bg={setUp.bgPrimary} py={2} px={4} rounded='xl'>
+                            <Text fontSize={12} textAlign='right' color='gray.100'>Esse nam minima, ratione ducimus minus cupiditate odio aut</Text>
+                        </Box>
+                        <HStack justifyContent='flex-end' alignItems='center' space={1}>
+                            <Text fontSize={10} color={setUp.MidGray}>15.47</Text>
+                            <Icon name='checkmark-done-outline' size={12} color='#1e81b0' />
                         </HStack>
                     </VStack>
                 </Box>
             </ScrollView>
             <Box bg='white' px={setUp.paddingScreen} py={3}>
                 <HStack space={2}>
-                    <Input px={1} h='43px' variant='outline' borderColor='#BFBFBF' flex={2} borderRadius={setUp.radius} _focus={{ borderColor: '#BFBFBF', bg: 'white' }} leftElement={
-                        <Button rounded='full' variant='unstyled' _pressed={{ bg: '#E4E4E4' }}>
+                    <Input px={1} h='43px' placeholder='Type something' variant='outline' borderColor='#BFBFBF' flex={2} borderRadius={setUp.radius} _focus={{ borderColor: '#BFBFBF', bg: 'white' }} leftElement={
+                        <Button rounded='full' w={9} h={9} textAlign='center' p={0} variant='unstyled' _pressed={{ bg: '#E4E4E4' }}>
                             <Icon name='happy-outline' size={18} color={setUp.MidGray} />
                         </Button>
                     } rightElement={
-                        <Button rounded='full' variant='unstyled' _pressed={{ bg: '#E4E4E4' }}>
+                        <Button rounded='full' w={9} h={9} textAlign='center' p={0} variant='unstyled' _pressed={{ bg: '#E4E4E4' }}>
                             <Icon name='attach-outline' size={18} color={setUp.MidGray} />
                         </Button>
                     } />

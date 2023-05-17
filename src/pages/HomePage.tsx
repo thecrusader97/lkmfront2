@@ -58,7 +58,7 @@ function HomePage() {
             <Stack safeArea>
                 <Box w='full' position='relative'>
                     <Image position='absolute' top={0} left={0} zIndex={-1} source={require('../../assets/banner-bg.png')} alt='banner-bg' width='full' h='full' resizeMode='cover' />
-                    <Box p={setUp.paddingScreen}>
+                    <Box px={setUp.paddingScreen} py={4}>
                         <HStack justifyContent='space-between' alignItems='center' mb={4}>
                             <Input InputLeftElement={<Icon name='search-outline' style={{ marginLeft: 10 }} size={16} color={setUp.MidGray} />} _focus={{ bg: 'white' }} color={setUp.MidGray} placeholder='Cari sesuatu disini' variant='outline' bg='white' py='5px' pl={2} w='84%' borderRadius={setUp.radius} />
                             <Pressable onPress={() => navigation.navigate('ProfilePage')}>

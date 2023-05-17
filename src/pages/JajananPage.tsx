@@ -133,7 +133,7 @@ function JajananPage() {
         <Stack safeArea bg={setUp.softWhite} flex={1}>
             <Box w='full' position='relative'>
                 <Image position='absolute' top={0} left={0} w='full' right={0} zIndex={-1} source={require('../../assets/banner-bg.png')} alt='banner-bg' width='full' h='full' resizeMode='cover' />
-                <Box p={setUp.paddingScreen}>
+                <Box px={setUp.paddingScreen} py={4}>
                     <HStack mb={2} alignItems='center'>
                         <Button p={1} rounded='full' h={8} w={8} variant='ghost' _pressed={{ bg: '#D9D9D922' }} onPress={() => navigation.navigate('BottomTabs')}>
                             <Icon name='chevron-back-outline' size={18} color='white' />
