@@ -25,11 +25,18 @@ function RateDriver() {
                     </Box>
                     <Heading fontSize={18}>Manshur Driver</Heading>
                     <Text fontSize={12} mb={2} textAlign='center' color={setUp.MidGray}>Masukanmu akan meningkatkan pengalaman menggunakan pelayanan kami</Text>
-                    <HStack space={1.5} alignItems='center'>
-                        <Text fontSize={12} color={setUp.bgPrimary} bold>#IH966TF</Text>
-                        <Box w='3.5px' h='3.5px' bg={setUp.LigtGray} rounded='full'></Box>
-                        <Text fontSize={12} color={setUp.bgPrimary} bold>Bonceng</Text>
-                    </HStack>
+                    <Box borderWidth={1} flexWrap='wrap-reverse' borderStyle='dashed' borderColor='gray.300' bg='white' p={4} w='full' rounded='xl'>
+                        <HStack>
+                            <VStack flex={2}>
+                                <Text fontSize={10} mb={-2} color={setUp.bgPrimary} bold>#IH966TF</Text>
+                                <Text fontSize={20} bold>Bonceng</Text>
+                                <Text color={setUp.bgPrimary} fontSize={12}>12-03-2023</Text>
+                            </VStack>
+                            <Box borderLeftWidth={1} borderStyle='dashed' borderColor='gray.300' pl={4}>
+                                <Heading fontSize={16} color={setUp.bgPrimary}>Rp. 12000</Heading>
+                            </Box>
+                        </HStack>
+                    </Box>
                     <HStack space={4} my={8}>
                         <Pressable>
                             <Icon name='star-outline' size={32} color='#F7D060' />
@@ -53,7 +60,7 @@ function RateDriver() {
                         <Button _pressed={{ bg: 'blueGray.100' }} borderWidth={1} borderColor='white' bg='white' rounded='xl' p={3} flex={1}><Text fontSize={12}>Bagus</Text></Button>
                     </HStack>
                     <HStack space={2} mb={2}>
-                        <Button _pressed={{ bg: 'blueGray.100' }} borderWidth={1} borderColor='white' bg='white' rounded='xl' p={3} flex={1}><Text fontSize={12}>Lumayan</Text></Button>
+                        <Button _pressed={{ bg: 'blueGray.100' }} borderWidth={1} borderColor='white' bg='white' rounded='xl' p={3} flex={1}><Text fontSize={12}>Biasa</Text></Button>
                         <Button _pressed={{ bg: 'blueGray.100' }} borderWidth={1} borderColor={other ? setUp.LigtGray : 'white'} onPress={() => setOther(!other)} bg='white' rounded='xl' p={3} flex={1}><Text fontSize={12}>Lainnya</Text></Button>
                     </HStack>
                     <TextArea isDisabled={!other} mb={4} h='100px' placeholder='Type something' bg={setUp.bgScreen} borderColor={setUp.LigtGray} _focus={{ borderColor: setUp.LigtGray, bg: setUp.bgScreen }} w='full' autoCompleteType='off' borderRadius={setUp.radius} px={4} color={setUp.MidGray} />
