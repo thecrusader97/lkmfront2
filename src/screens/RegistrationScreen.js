@@ -1,84 +1,76 @@
-// RegistrationScreen.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
-import axios from 'axios';
+import { Box, Button, Center, Checkbox, HStack, Image, Input, Spinner, KeyboardAvoidingView, Pressable, ScrollView, Text, VStack, Heading } from 'native-base'
+import React, { useState } from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native'
+import style from '../../style'
+import Alert from '../component/Alert'
+import axios from 'axios'
 
-const RegistrationScreen = () => {
+function RegisterScreen() {
+  const [showPass, setShowPass] = useState(false)
+  const [showPass2, setShowPass2] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [notif, setNotif] = useState(false);
+  const navigation = useNavigation()
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const handleRegister = async () => {
+  const register = async () => {
+    setIsLoading(true)
     try {
-      const response = await axios.post('http://192.168.1.3:8080/api/register', {
+      const response = await axios.post(`http://localhost:8000/api/register`, {
         name,
         phone,
         password,
         password_confirmation: passwordConfirmation,
       });
-
-       // Handle a successful registration response here.
-       Alert.alert('Registration Successful', 'You are now registered!', [
-        {
-          text: 'Go to Login',
-          onPress: () => navigation.navigate('Login'), // Navigate to the Login screen
-        },
-      ]);
+      console.log(response);
     } catch (error) {
-      if (error.response) {
-        // The request was made, and the server responded with a non-2xx status code
-        console.error('Registration Error:', error.response.data);
-    
-        // Display the server's error message to the user
-        Alert.alert('Registration Failed', error.response.data.message || 'An error occurred during registration.');
-      } else if (error.request) {
-        // The request was made, but no response was received
-        console.error('Registration Error:', error.request);
-    
-        // Handle the case where there is no response from the server
-        Alert.alert('Registration Failed', 'No response received from the server.');
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.error('Registration Error:', error.message);
-    
-        // Handle other types of errors
-        Alert.alert('Registration Failed', 'An error occurred during registration. Please try again later.');
-      }
+      console.log(error);
+
     }
-  };
+  }
 
   return (
-    <View>
-      <Text>Name:</Text>
-      <TextInput
-        value={name}
-        onChangeText={setName}
-        placeholder="Name"
-      />
-      <Text>Phone:</Text>
-      <TextInput
-        value={phone}
-        onChangeText={setPhone}
-        placeholder="Phone"
-      />
-      <Text>Password:</Text>
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-        placeholder="Password"
-      />
-      <Text>Confirm Password:</Text>
-      <TextInput
-        value={passwordConfirmation}
-        onChangeText={setPasswordConfirmation}
-        secureTextEntry={true}
-        placeholder="Confirm Password"
-      />
-      <Button title="Register" onPress={handleRegister} />
-    </View>
-  );
-};
+    <KeyboardAvoidingView style={{ flex: 1 }}>
+      <Box safeArea bg={style.bg}>
+        <Box h='full' padding={5}>
+          <Center height='30%'>
+            {/* tah image tambahan didieu */}
+            {/* <Image source={require('../../../assets/logo.png')} alt='logo' size='1/2' resizeMode='contain' /> */}
+            <Heading fontSize={32}>PT. LKM Garut</Heading>
+          </Center>
+          <VStack space={4}>
+            <Input value={name} onChangeText={setName} type='text' _focus={{ bg: 'white', borderColor: '#E3454D' }} variant='outline' borderColor='#C5C5C5' borderRadius={15} bg={'#F9F9F9'} placeholder='nama' px={4} />
+            <Input value={phone} onChangeText={setPhone} type='text' _focus={{ bg: 'white', borderColor: '#E3454D' }} variant='outline' borderColor='#C5C5C5' borderRadius={15} bg={'#F9F9F9'} placeholder='08xxxxxxxxx' px={4} />
+            <Input value={password} onChangeText={setPassword} type={showPass ? 'text' : 'password'} _focus={{ bg: '#F9F9F9', borderColor: '#E3454D' }} variant='outline' autoComplete='password' borderColor='#C5C5C5' borderRadius={15} bg={'#F9F9F9'} placeholder='password' px={4} InputRightElement={
+              <Pressable mr={3} onPress={() => setShowPass(!showPass)}>
+                <Icon name={showPass ? 'eye-off-outline' : 'eye-outline'} size={20} color='#C5C5C5' />
+              </Pressable>
+            } />
+            <Input value={passwordConfirmation} onChangeText={setPasswordConfirmation} type={showPass2 ? 'text' : 'password'} _focus={{ bg: '#F9F9F9', borderColor: '#E3454D' }} variant='outline' autoComplete='password' borderColor='#C5C5C5' borderRadius={15} bg={'#F9F9F9'} placeholder='confirm password' px={4} InputRightElement={
+              <Pressable mr={3} onPress={() => setShowPass2(!showPass2)}>
+                <Icon name={showPass2 ? 'eye-off-outline' : 'eye-outline'} size={20} color='#C5C5C5' />
+              </Pressable>
+            } />
+            <Button onPress={register} _text={{ fontWeight: 'bold', textTransform: 'uppercase' }} bg={style.primary} py={3} shadow={10} borderRadius={15} _pressed={{ bg: '#ffffff17' }}>
+              {isLoading ? <Spinner color='white' /> : 'Register'}
+            </Button>
+          </VStack>
+          <Box mt={4} flexDirection='row' justifyContent='center' alignItems='flex-end' _text={{ color: style.primary, fontSize: 13 }}>
+            Already have an account ?
+            <Pressable onPress={() => navigation.navigate('Login')} ml={1}>
+              <Text bold underline color={style.primary} fontSize={13}>Login Now</Text>
+            </Pressable>
+          </Box>
+        </Box>
 
-export default RegistrationScreen;
+        <Alert isOpen={notif} onClose={() => setNotif(false)} />
+      </Box >
+    </KeyboardAvoidingView>
+  )
+}
+
+export default RegisterScreen

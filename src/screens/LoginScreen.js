@@ -1,86 +1,44 @@
-// LoginScreen.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
-import { decode as atob } from 'base-64';
+import { Box, Button, Center, Checkbox, HStack, Image, Input, KeyboardAvoidingView, Pressable, ScrollView, Text, VStack, Heading } from 'native-base'
+import React, { useState } from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native'
+import style from '../../style'
 
-const LoginScreen = () => {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const navigation = useNavigation();
+function LoginScreen() {
+  const navigation = useNavigation()
+  const [showPass, setShowPass] = useState(false)
 
-  const handleRegister = () => {
-    // Navigate to the registration screen when the button is pressed
-    navigation.navigate('Registration');
-  };
-  
-
-  const handleLogin = async () => {
-    
-    try {
-      const response = await axios.post('http://192.168.1.3:8080/api/login', {
-        phone,
-        password,
-      });
-
-      const responseData = response.data;
-
-
-      if (responseData.Authorization && responseData.Authorization.token) {
-        const token = responseData.Authorization.token;
-
-        // Decode the JWT token using atob
-        const decodedToken = JSON.parse(atob(token.split('.')[1]));
-
-        // Store the token and decoded data using AsyncStorage
-        await AsyncStorage.setItem('jwtToken', token);
-        await AsyncStorage.setItem('userData', JSON.stringify(decodedToken));
-
-        // Navigate to the Home screen or perform any other necessary actions
-        navigation.navigate('Home');
-      } else {
-        console.error('Login Error: Token not found in the response');
-        Alert.alert('Login Failed', 'Invalid email or password. Please try again.');
-      }
-
-    } catch (error) {
-        if (error.response) {
-        // Server responded with an error status code
-        console.error('Login Error:', error.response.data);
-        Alert.alert('Login Failed', 'Invalid email or password. Please try again.');
-      } else if (error.request) {
-        // The request was made, but no response was received
-        console.error('Login Error: No response from the server');
-        Alert.alert('Network Error', 'Unable to connect to the server. Please check your network connection.');
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.error('Login Error:', error.message);
-        Alert.alert('Login Failed', 'An error occurred during login. Please try again later.');
-      }
-    }
-  };
 
   return (
-    <View>
-      <Text>Phone:</Text>
-      <TextInput
-        value={phone}
-        onChangeText={setPhone}
-        placeholder="No hp"
-      />
-      <Text>Password:</Text>
-      <TextInput
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-        placeholder="Password"
-      />
-      <Button title="Login" onPress={handleLogin} />
-      <Button title="Register" onPress={handleRegister} />
-    </View>
-  );
-};
+    <KeyboardAvoidingView style={{ flex: 1 }}>
+      <Box safeArea bg={style.bg}>
+        <Box h='full' padding={5}>
+          <Center height='45%'>
+            {/* tah image tambahan didieu */}
+            {/* <Image source={require('../../../assets/logo.png')} alt='logo' size='1/2' resizeMode='contain' /> */}
+            <Heading fontSize={32}>PT. LKM Garut</Heading>
+          </Center>
+          <VStack space={4}>
+            <Input type='text' _focus={{ bg: 'white', borderColor: '#E3454D' }} variant='outline' borderColor='#C5C5C5' borderRadius={15} bg={'#F9F9F9'} placeholder='08xxxxxxxxx' px={4} />
+            <Input type={showPass ? 'text' : 'password'} _focus={{ bg: '#F9F9F9', borderColor: '#E3454D' }} variant='outline' autoComplete='password' borderColor='#C5C5C5' borderRadius={15} bg={'#F9F9F9'} placeholder='*********' px={4} InputRightElement={
+              <Pressable mr={3} onPress={() => setShowPass(!showPass)}>
+                <Icon name={showPass ? 'eye-off-outline' : 'eye-outline'} size={20} color='#C5C5C5' />
+              </Pressable>
+            } />
+            <Button onPress={() => navigation.navigate('BottomTabs')} _text={{ fontWeight: 'bold', textTransform: 'uppercase' }} bg={style.primary} py={3} shadow={10} borderRadius={15} _pressed={{ bg: '#ffffff17' }}>
+              Login
+            </Button>
+          </VStack>
+          <Box mt={4} flexDirection='row' justifyContent='center' alignItems='flex-end' _text={{ color: style.primary, fontSize: 13 }}>
+            Don’t have an account ?
+            <Pressable onPress={() => navigation.navigate('Registration')} ml={1}>
+              <Text bold underline color={style.primary} fontSize={13}>Register Now</Text>
+            </Pressable>
+          </Box>
+        </Box>
+      </Box >
+    </KeyboardAvoidingView>
+  )
+}
 
-export default LoginScreen;
+export default LoginScreen
