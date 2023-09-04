@@ -1,24 +1,27 @@
-import { Box, Button, Flex, Image, VStack } from 'native-base'
+import { Box, Button, Center, Flex, HStack, Heading, Image, VStack, Divider, Text } from 'native-base'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import setUp from '../setup'
+import style from '../../style'
 
 function FrontPage() {
     const navigation: any = useNavigation()
+    setTimeout(() => {
+        navigation.navigate('LoginPage')
+    }, 1000)
     return (
-        <Box flex={1} safeArea>
-            <Image source={require('../../assets/bg.png')} alt='broken' w='full' height='full' resizeMode='cover' />
-            <Box position='absolute' top={0} left={0} w='full' h='full' p={setUp.paddingScreen}>
-                <Flex flex={1} justifyContent='center' alignItems='center'>
-                    <Image source={require('../../assets/logo.png')} alt='logo' width={200} resizeMode='contain'></Image>
-                </Flex>
-                <Flex flex={1} justifyContent='flex-end' mb={4}>
-                    <VStack space={3}>
-                        <Button _pressed={{ bg: '#D9D9D937' }} bg={setUp.whiteOpacity} py={3} rounded='xl' w='full' _text={{ color: '#C6C6C6', textTransform: 'uppercase', letterSpacing: 1, fontSize: 12 }} onPress={() => navigation.navigate('LoginPage')}>Login</Button>
-                        <Button _pressed={{ bg: '#D9D9D937' }} bg={setUp.whiteOpacity} py={3} rounded='xl' w='full' _text={{ color: '#C6C6C6', textTransform: 'uppercase', letterSpacing: 1, fontSize: 12 }} onPress={() => navigation.navigate('RegisterPage')}>Register</Button>
-                    </VStack>
-                </Flex>
-            </Box>
+        <Box flex={1} safeArea bg='white' justifyContent='center' alignItems='center'>
+            <Center flex={1}>
+                <Image source={require('../../assets/logo.png')} alt='logo' width={300} resizeMode='contain' />
+                <Heading color={style.primary} fontSize={32}>PT. LKM Garut</Heading>
+            </Center>
+            <HStack alignItems='center' justifyContent='center' space={2}>
+                <Image source={require('../../assets/ojk.png')} alt='logo' width={100} resizeMode='contain' />
+                <Divider orientation="vertical" height={8} />
+                <VStack>
+                    <Heading color={style.primary} fontSize={14}>Powered By</Heading>
+                    <Text color={style.secondary} fontSize={12} mt={-1}>Jager Studio</Text>
+                </VStack>
+            </HStack>
         </Box>
     )
 }

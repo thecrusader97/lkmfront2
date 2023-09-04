@@ -1,52 +1,42 @@
-import { Box, Button, Center, Checkbox, HStack, Image, Input, KeyboardAvoidingView, Pressable, ScrollView, Text, VStack } from 'native-base'
+import { Box, Button, Center, Checkbox, HStack, Image, Input, KeyboardAvoidingView, Pressable, ScrollView, Text, VStack, Heading } from 'native-base'
 import React, { useState } from 'react'
-import setUp from '../../setup'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
+import style from '../../../style'
 
 function LoginPage() {
+    const navigation = useNavigation()
     const [showPass, setShowPass] = useState(false)
-    const navigation: any = useNavigation()
+
+
     return (
-        <KeyboardAvoidingView behavior='height' enabled={true} style={{ flex: 1 }}>
-            <Box safeArea bg={setUp.bgScreen}>
-                <Image position='absolute' left={0} top={0} source={require('../../../assets/ellipse.png')} alt='background' h='full' w='full' />
-                <Box h='full' padding={setUp.paddingScreen}>
+        <KeyboardAvoidingView style={{ flex: 1 }}>
+            <Box safeArea bg={style.bg}>
+                <Box h='full' padding={5}>
                     <Center height='45%'>
                         <Image source={require('../../../assets/logo.png')} alt='logo' size='1/2' resizeMode='contain' />
+                        <Heading fontSize={32} color={style.primary}> PT.LKM Garut</Heading>
                     </Center>
                     <VStack space={4}>
-                        <Input type='text' _focus={{ bg: setUp.softWhite, borderColor: setUp.bgPrimary }} variant='outline' borderColor={setUp.LigtGray} borderRadius={setUp.radius} bg={setUp.softWhite} placeholder='08xxxxxxx' px={4} />
-                        <Input type={showPass ? 'text' : 'password'} _focus={{ bg: setUp.softWhite, borderColor: setUp.bgPrimary }} variant='outline' autoComplete='password' borderColor={setUp.LigtGray} borderRadius={setUp.radius} bg={setUp.softWhite} placeholder='*********' px={4} InputRightElement={
+                        <Input type='text' _focus={{ bg: 'white', borderColor: '#E3454D' }} variant='outline' borderColor='#C5C5C5' borderRadius={15} bg={'#F9F9F9'} placeholder='08xxxxxxxxx' px={4} />
+                        <Input type={showPass ? 'text' : 'password'} _focus={{ bg: '#F9F9F9', borderColor: '#E3454D' }} variant='outline' autoComplete='password' borderColor='#C5C5C5' borderRadius={15} bg={'#F9F9F9'} placeholder='*********' px={4} InputRightElement={
                             <Pressable mr={3} onPress={() => setShowPass(!showPass)}>
-                                <Icon name={showPass ? 'eye-off-outline' : 'eye-outline'} size={20} color={setUp.LigtGray} />
+                                <Icon name={showPass ? 'eye-off-outline' : 'eye-outline'} size={20} color='#C5C5C5' />
                             </Pressable>
                         } />
-                        <HStack justifyContent='space-between'>
-                            <HStack space={2}>
-                                <Checkbox _checked={{ bg: setUp.bgPrimary, borderColor: setUp.bgPrimary }} borderColor={setUp.bgPrimary} value='' aria-label='remember me' _focus={{ bg: setUp.bgPrimary }} borderRadius={6} />
-                                <Text fontSize={12} color={setUp.LigtGray}>Remember me</Text>
-                            </HStack>
-                            <Pressable onPress={() => navigation.navigate('ForgotPassword')}>
-                                <Text fontSize={12} color={setUp.LigtGray} underline>Forgot Password ?</Text>
-                            </Pressable>
-                        </HStack>
-                        <LinearGradient colors={[setUp.bgPrimary, setUp.bgSecondary]} start={{ x: 0, y: 1 }} style={{ borderRadius: setUp.radius, elevation: 5 }}>
-                            <Button onPress={() => navigation.navigate('BottomTabs')} bg='transparent' py={3} borderRadius={setUp.radius} _pressed={{ bg: '#ffffff17' }}>
-                                Login
-                            </Button>
-                        </LinearGradient>
+                        <Button onPress={() => navigation.navigate('BottomTabs')} _text={{ fontWeight: 'bold', textTransform: 'uppercase' }} bg={style.primary} py={3} shadow={10} borderRadius={15} _pressed={{ bg: '#ffffff17' }}>
+                            Login
+                        </Button>
                     </VStack>
-                    <Box flex={1} flexDirection='row' justifyContent='center' alignItems='flex-end' _text={{ color: setUp.MidGray, fontSize: 13 }}>
+                    <Box mt={4} flexDirection='row' justifyContent='center' alignItems='flex-end' _text={{ color: style.primary, fontSize: 13 }}>
                         Don’t have an account ?
                         <Pressable onPress={() => navigation.navigate('RegisterPage')} ml={1}>
-                            <Text underline fontSize={13}>Register Now</Text>
+                            <Text bold underline color={style.primary} fontSize={13}>Register Now</Text>
                         </Pressable>
                     </Box>
                 </Box>
             </Box >
-        </KeyboardAvoidingView>
+        </KeyboardAvoidingView >
     )
 }
 

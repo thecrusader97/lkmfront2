@@ -1,11 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HistoryPage from '../src/pages/HistoryPage';
-import HomePage from '../src/pages/HomePage';
 import { Center, Image, Stack, Text } from 'native-base';
 import { StyleSheet } from 'react-native'
-import setUp from '../src/setup';
-import NotifPage from '../src/pages/NotifPage';
-import PromoPage from '../src/pages/PromoPage';
+import HistoryPage from '../src/pages/HistoryPage';
+import HomePage from '../src/pages/HomePage';
+import ProfilePage from '../src/pages/ProfilePage';
+import SchedulePage from '../src/pages/SchedulePage';
+import Icon from 'react-native-vector-icons/Ionicons'
+import style from '../style';
 const Tab = createBottomTabNavigator();
 
 const styles = StyleSheet.create({
@@ -27,14 +28,14 @@ function BottomTabs() {
                 tabBarIcon: ({ focused }) => (
                     <Center>
                         {focused ?
-                            <Stack flex={1} flexDirection='column' justifyItems='center' justifyContent='center'>
-                                <Image source={require('../assets/bottom-icons/HomeActive.png')} alt='home' mx='auto' w='20px' h='20px' resizeMode='contain' />
-                                <Text fontSize={10} bold color={setUp.bgPrimary}>Beranda</Text>
+                            <Stack>
+                                <Icon name="home-outline" size={24} color={style.primary} />
+                                <Text fontSize={10} bold color={style.primary}>Beranda</Text>
                             </Stack>
                             :
                             <Stack>
-                                <Image source={require('../assets/bottom-icons/Home.png')} alt='home' mx='auto' w='20px' h='20px' resizeMode='contain' />
-                                <Text fontSize={10} bold color={setUp.LigtGray}>Beranda</Text>
+                                <Icon name="home-outline" size={24} color={style.ligtGray} />
+                                <Text fontSize={10} bold color={style.ligtGray}>Beranda</Text>
                             </Stack>
                         }
                     </Center>
@@ -45,49 +46,49 @@ function BottomTabs() {
                     <Center>
                         {focused ?
                             <Stack>
-                                <Image source={require('../assets/bottom-icons/HistoryActive.png')} alt='history' mx='auto' w='20px' h='20px' resizeMode='contain' />
-                                <Text fontSize={10} bold color={setUp.bgPrimary}>Riwayat</Text>
+                                <Icon name="document-text-outline" size={24} color={style.primary} />
+                                <Text fontSize={10} bold color={style.primary}>Riwayat</Text>
                             </Stack>
                             :
                             <Stack>
-                                <Image source={require('../assets/bottom-icons/History.png')} alt='history' mx='auto' w='20px' h='20px' resizeMode='contain' />
-                                <Text fontSize={10} bold color={setUp.LigtGray}>Riwayat</Text>
+                                <Icon name="document-text-outline" size={24} color={style.ligtGray} />
+                                <Text fontSize={10} bold color={style.ligtGray}>Riwayat</Text>
                             </Stack>
                         }
                     </Center>
                 )
             }}
             />
-            <Tab.Screen name="NotifPage" component={NotifPage} options={{
+            <Tab.Screen name="SchedulePage" component={SchedulePage} options={{
                 tabBarIcon: ({ focused }) => (
                     <Center>
                         {focused ?
                             <Stack>
-                                <Image source={require('../assets/bottom-icons/BellActive.png')} alt='bell' mx='auto' w='20px' h='20px' resizeMode='contain' />
-                                <Text fontSize={10} bold color={setUp.bgPrimary}>Notif</Text>
+                                <Icon name="calendar-outline" size={24} color={style.primary} />
+                                <Text fontSize={10} bold color={style.primary}>Jadwal</Text>
                             </Stack>
                             :
                             <Stack>
-                                <Image source={require('../assets/bottom-icons/Bell.png')} alt='bell' mx='auto' w='20px' h='20px' resizeMode='contain' />
-                                <Text fontSize={10} bold color={setUp.LigtGray}>Notif</Text>
+                                <Icon name="calendar-outline" size={24} color={style.ligtGray} />
+                                <Text fontSize={10} bold color={style.ligtGray}>Jadwal</Text>
                             </Stack>
                         }
                     </Center>
                 )
             }}
             />
-            <Tab.Screen name="PromoPage" component={PromoPage} options={{
+            <Tab.Screen name="ProfilePage" component={ProfilePage} options={{
                 tabBarIcon: ({ focused }) => (
                     <Center>
                         {focused ?
                             <Stack>
-                                <Image source={require('../assets/bottom-icons/PromoActive.png')} alt='Promo' mx='auto' w='20px' h='20px' resizeMode='contain' />
-                                <Text fontSize={10} bold color={setUp.bgPrimary}>Promo</Text>
+                                <Icon name="person-outline" size={24} color={style.primary} />
+                                <Text fontSize={10} bold color={style.primary}>Profile</Text>
                             </Stack>
                             :
                             <Stack>
-                                <Image source={require('../assets/bottom-icons/Promo.png')} alt='Promo' mx='auto' w='20px' h='20px' resizeMode='contain' />
-                                <Text fontSize={10} bold color={setUp.LigtGray}>Promo</Text>
+                                <Icon name="person-outline" size={24} color={style.ligtGray} />
+                                <Text fontSize={10} bold color={style.ligtGray}>Profile</Text>
                             </Stack>
                         }
                     </Center>
